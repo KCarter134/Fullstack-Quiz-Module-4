@@ -126,7 +126,8 @@ section{
     width: 250px;
 }
 
-.question-answers .option{
+.question-answers .option {
+    color: white;
     background-color: #38125c;
     border: 1px solid #38125c;
     border-radius: 5px;
