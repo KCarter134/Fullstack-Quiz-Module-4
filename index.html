@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fullstack Quiz</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <header>
+        <div class="high-score">
+            <a class="high-score-link" href="#">View High Scores</a> 
+        </div>
+        <div class="timer">Time: </div>
+    </header>
+<!-- startQuiz button -->
+<!-- Intro Container -->
+<div class="quiz-start">
+    <div class="info-title"><span>Coding Quiz Challenge</span></div>
+    <div class="info-list">
+        <div class="info">Try to answer the following code-related questions within the time limit. Keep in mind that 
+            incorrectanswers will penalize your score/time by ten seconds!</div>
+    </div>
+    <div class="buttons">
+        <button class="start" id="start-btn">Start Quiz</button>
+    </div>
+</div>
+<!-- Quiz Container -->
+<div class="quiz-container">
+
+    <section>
+        <div class="question-title">
+            <!-- Here I've inserted question from JavaScript -->
+        </div>
+        <div class="question-answers">
+            <!-- Here I've inserted options from JavaScript -->
+        </div>
+    </section>
+
+    <footer>
+        <button class="next-question-btn">Next Question</button>
+    </footer>
+</div>
+<!-- Result Box -->
+<div class="results-container">
+
+    <div class="finish"><b>COMPLETE!</b></div>
+    <div class="final-score">
+        
+    </div>
+    <div class="buttons">
+        <button type="submit" class="submit">Submit Score</button>
+    </div>
+</div>
+
+<script src="js/javascript.js"></script>
+</body>
+</html>

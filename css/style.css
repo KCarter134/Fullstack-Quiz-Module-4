@@ -1,0 +1,233 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    margin: 25px;
+    margin-right: 50px;
+}
+
+.high-score, 
+.high-score a{
+    text-decoration: none;
+    color: #7328b9;
+    font-weight: 600;
+}
+
+::selection{
+    color: #fff;
+    background: #38125c;
+}
+
+.quiz-start,
+.quiz-container,
+.results-container{
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 
+                0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+}
+.quiz-start.activeInfo,
+.quiz-container.activeQuiz,
+.results-container.activeResult{
+    opacity: 1;
+    z-index: 5;
+    pointer-events: auto;
+
+}
+#start-btn button{
+    font-size: 25px;
+    font-weight: 500;
+    background: #38125c;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+/*  */
+                                                        /* CODE START */
+.info {
+    text-align: center !important;
+}
+
+.info-title { 
+    font-weight: 600 !important;
+}
+
+.quiz-start{
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.quiz-start .info-title{
+    height: 100%;
+    width: 50vw !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 65px;
+    font-weight: 600;
+}
+
+.quiz-start,
+.info-list, 
+.info {
+    margin: 5px 0;
+    font-size: 22px;
+    padding: 10px 30px;
+    padding-bottom: 0;
+}
+                                                        
+.quiz-start .buttons{
+    display: flex;
+    justify-content: center;
+    padding: 10px 30px;
+}
+.quiz-start .buttons button{
+    margin: 0 5px;
+    height: 40px;
+    width: 100px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+                                                        /* INTRO CODE END */
+
+                                                        /* Quiz Start */
+
+.quiz-container{
+    width: 50vw;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+section{
+    padding: 20px 30px;
+}
+
+.question-title{
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.question-answers{
+    padding: 20px 0px;
+    display: block;   
+    color: white;
+    width: 250px;
+}
+
+.question-answers .option{
+    background-color: #38125c;
+    border: 1px solid #38125c;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 22px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+}
+
+.question-answers .option:hover{
+    background: #7328b9;
+    border: 1px solid #b8daff;
+}
+
+                                                        /* Quiz End */
+footer{
+padding-left: 30px;
+color: white;
+}
+
+.next-question-btn{
+    height: 40px;
+    padding: 0 13px;
+    font-size: 18px;
+    font-weight: 400;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    color: #fff;
+    border-radius: 5px;
+    background: #000000;
+    border: 1px solid #000000;
+    line-height: 10px;
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.95);
+    transition: all 0.3s ease;
+}
+
+.next-question-btn.show{
+    opacity: 1;
+    pointer-events: auto;
+}
+.results-container{
+    background: #fff;
+    border-radius: 5px;
+    display: flex;
+    padding: 25px 30px;
+    width: 450px;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+.results-container .icon{
+    font-size: 100px;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+.results-container .finish{
+    font-size: 20px;
+    font-weight: 500;
+}
+.results-container .final-score span{
+    display: flex;
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: 500;
+}
+.results-container .final-score span p{
+    padding: 0 4px;
+    font-weight: 600;
+}
+.results-container .buttons{
+    display: flex;
+    margin: 20px 0;
+}
+.results-container .buttons button{
+    margin: 0 10px;
+    height: 45px;
+    padding: 0 20px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #007bff;
+    transition: all 0.3s ease;
+}
+
+
+.buttons {
+    text-align: center;
+}
+
+.info {
+    text-align: center !important;
+}
