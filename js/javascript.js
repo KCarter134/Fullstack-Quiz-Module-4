@@ -49,58 +49,69 @@ let questions = [
     },
 ];
 
-//getting questions and options from array
-function pullQuestions() {
-    const puller = document.querySelector("");
-}
-
 // const start_btn = document.querySelector(".start-btn button");
 const startQuiz = document.querySelector(".quiz-start");
-const endSubmit = startQuiz.querySelector(".buttons .submit");
-const continueBtn = startQuiz.querySelector(".buttons .start");
 const quizContainer = document.querySelector(".quiz-container");
 const resultsContainer = document.querySelector(".results-container");
+const scoresContainer = document.querySelector(".scores-container");
+const scoreHeader = scoresContainer.querySelector(".score-header")
 const answerDisplay = document.querySelector(".question-answers");
 const answerResponse = document.querySelector(".answer-response");
 const optionBtn = document.querySelector(".option")
 const timerDisplay = document.querySelector(".timer");
+const scoreSubmitBtn = document.querySelector(".score-submit")
+const highScoresLink = document.querySelector(".high-score-link")
+const scoresList = document.querySelector(".scores-list")
+const goBack = scoresContainer.querySelector(".scores-go-back")
+const clearScores = scoresContainer.querySelector(".clear-scores")
 
 // when the startQuiz button is clicked
-
 startQuiz.classList.add("activeInfo");
+clearHighScores()
 
-// if continueQuiz button clicked
-continueBtn.onclick = () => {
-    //hide intro container
-    startQuiz.classList.remove("activeInfo");
-    //show quiz container
-    quizContainer.classList.add("activeQuiz");
-    showOptions(0);
-    questionCounter(1);
-};
+
+document.querySelector('form').addEventListener('submit', (e) => {
+    const data = Object.fromEntries(new FormData(e.target).entries());
+    console.log(data['initials'])
+    saveScore(data['initials'])
+    showHighScores()
+})
 
 let counter;
 let counterLine;
 let questionCount = 0;
 let timer;
 
-const quit_quiz = resultsContainer.querySelector(".buttons .submit");
-
 // if start button is clicked
-startQuiz.onclick = () => {
+startQuiz.onclick = () => beginQuiz()
+highScoresLink.onclick = () => showHighScores()
+goBack.onclick = () => {
+    startQuiz.classList.add("activeInfo");
+    quizContainer.classList.remove("activeQuiz"); //hide quiz box
+    resultsContainer.classList.remove("activeResult"); //hide result box
+    scoresContainer.classList.remove("activeScore")
+}
+clearScores.onclick = () => clearHighScores()
+
+function beginQuiz() {
+    startQuiz.classList.remove("activeInfo");
     quizContainer.classList.add("activeQuiz"); //show quiz box
     resultsContainer.classList.remove("activeResult"); //hide result box
+    scoresContainer.classList.remove("activeScores")
     questionCount = 0;
     timer = 75;
 
     showTimer()
     showOptions(questionCount); //calling showOptions function
-};
+}
 
-// if quitQuiz button clicked
-quit_quiz.onclick = () => {
-    window.location.reload(); //reload the current window
-};
+function getStarted() {
+    return JSON.parse(localStorage.getItem("started"))
+}
+
+function setStarted(started) {
+    return localStorage.setItem("started", JSON.stringify(started))
+}
 
 function showPrevAnswerCorrect(userAnswer, correctAnswer) {
     let html = '<hr><br>'
@@ -144,16 +155,12 @@ function showOptions(index) {
 
 }
 
-// creating the new div tags which for icons
-let tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>';
-let crossIconTag = '<div class="icon cross"><i class="fas fa-times"></i></div>';
-
 //if user clicked on option
-function optionSelected(correctAnswer) {
+function optionSelected(userSelection) {
     clearInterval(counter); //clear counter
     clearInterval(counterLine); //clear counterLine
 
-    let userAns = correctAnswer.textContent; //getting user selected option
+    let userAns = userSelection.textContent; //getting user selected option
     let correctAns = questions[questionCount].correctAnswers; //getting correct answer from array
 
     if (questionCount < questions.length - 1) {
@@ -181,5 +188,38 @@ function showResult() {
     quizContainer.classList.remove("activeQuiz"); //hide quiz box
     resultsContainer.classList.add("activeResult"); //show result box
     const scoreText = resultsContainer.querySelector(".final-score");
-    scoreText.innerHTML = timer
+    scoreText.innerHTML = 'Your final score is: ' + timer;
+}
+
+function saveScore(initials) {
+
+    let scoresObj = JSON.parse(localStorage.getItem("scores"))
+    let scoresMap = new Map(Object.entries(scoresObj))
+    scoresMap.set(initials, timer)
+    localStorage.setItem("scores", JSON.stringify(Object.fromEntries(scoresMap)))
+}
+
+function showHighScores() {
+    startQuiz.classList.remove("activeInfo"); //hide info box
+    quizContainer.classList.remove("activeQuiz"); //hide quiz box
+    resultsContainer.classList.remove("activeResult"); //hide result box
+    scoresContainer.classList.add("activeScore")
+
+    scoreHeader.innerHTML = "High Scores"
+
+    let scoresObj = JSON.parse(localStorage.getItem("scores"))
+    let scoresMap = new Map(Object.entries(scoresObj))
+    let sorted = new Map([...scoresMap.entries()].sort((a, b) => b[1] - a[1]))
+
+    sorted.forEach((values, keys) => {
+        scoresList.innerHTML += '<li>' + keys + ' - ' + values + '</li>'
+    })
+
+    goBack.innerHTML = "Go back"
+    clearScores.innerHTML = "Clear high scores"
+
+}
+
+function clearHighScores() {
+    localStorage.setItem("scores", JSON.stringify(Object.entries(new Map())))
 }

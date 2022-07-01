@@ -11,7 +11,7 @@
 <body>
     <header>
         <div class="high-score">
-            <a class="high-score-link" href="#">View High Scores</a> 
+            <a class="high-score-link" href="#">View High Scores</a>
         </div>
         <div class="timer">Time: </div>
     </header>
@@ -20,7 +20,7 @@
 <div class="quiz-start">
     <div class="info-title"><span>Coding Quiz Challenge</span></div>
     <div class="info-list">
-        <div class="info">Try to answer the following code-related questions within the time limit. Keep in mind that 
+        <div class="info">Try to answer the following code-related questions within the time limit. Keep in mind that
             incorrect answers will penalize your score/time by 15 seconds!</div>
     </div>
     <div class="buttons">
@@ -50,13 +50,26 @@
 <!-- Result Box -->
 <div class="results-container">
 
-    <div class="finish"><b>COMPLETE!</b></div>
+    <div class="finish"><b>All done!</b></div>
     <div class="final-score">
-        
+
     </div>
-    <div class="buttons">
-        <button type="submit" class="submit">Submit Score</button>
+    <div class="enter-score-container">
+        <form class="score-form">
+            <label for="initials">Enter initials: </label>
+            <input type="text" id="initials" name="initials">
+            <input class="score-submit" type="submit" value="Submit">
+        </form>
     </div>
+</div>
+
+<div class="scores-container">
+
+    <h1 class="score-header"></h1>
+    <ol class="scores-list"></ol>
+    <button class="scores-go-back"></button>
+    <button class="clear-scores"></button>
+
 </div>
 
 <script src="js/javascript.js"></script>
